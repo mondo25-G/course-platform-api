@@ -19,7 +19,7 @@ public class Lesson {
 
     private int position;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
 
