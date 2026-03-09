@@ -20,14 +20,16 @@ public class StudentController {
 
     // GET /api/students
     @GetMapping
-    public List<StudentDTO> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
+        List<StudentDTO> students =studentService.getAllStudents();
+        return ResponseEntity.ok(students);
     }
 
     // GET /api/students/{id}
     @GetMapping("/{id}")
-    public StudentDTO getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
+        StudentDTO student = studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
     }
 
     // POST /api/students
@@ -39,9 +41,10 @@ public class StudentController {
 
     // PUT /api/students/{id}
     @PutMapping("/{id}")
-    public StudentDTO updateStudent(@PathVariable Long id,
+    public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id,
                                     @Valid @RequestBody StudentLightDTO dto) {
-        return studentService.updateStudent(id, dto);
+        StudentDTO updated  = studentService.updateStudent(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     // DELETE /api/students/{id}

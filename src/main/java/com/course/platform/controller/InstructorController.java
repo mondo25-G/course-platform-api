@@ -2,6 +2,7 @@ package com.course.platform.controller;
 
 import com.course.platform.dto.InstructorDTO;
 import com.course.platform.dto.light.InstructorLightDTO;
+import com.course.platform.model.Instructor;
 import com.course.platform.service.InstructorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,16 @@ public class InstructorController {
 
     // GET /api/instructors
     @GetMapping
-    public List<InstructorDTO> getAllInstructors() {
-        return instructorService.getAllInstructors();
+    public ResponseEntity<List<InstructorDTO>> getAllInstructors() {
+        List<InstructorDTO> instructors =instructorService.getAllInstructors();
+        return ResponseEntity.ok(instructors);
     }
 
     // GET /api/instructors/{id}
     @GetMapping("/{id}")
-    public InstructorDTO getInstructorById(@PathVariable Long id) {
-        return instructorService.getInstructorById(id);
+    public ResponseEntity<InstructorDTO> getInstructorById(@PathVariable Long id) {
+        InstructorDTO instructor = instructorService.getInstructorById(id);
+        return ResponseEntity.ok(instructor);
     }
 
     // POST /api/instructors
@@ -39,9 +42,10 @@ public class InstructorController {
 
     // PUT /api/instructors/{id}
     @PutMapping("/{id}")
-    public InstructorDTO updateInstructor(@PathVariable Long id,
+    public ResponseEntity<InstructorDTO> updateInstructor(@PathVariable Long id,
                                           @Valid @RequestBody InstructorLightDTO dto) {
-        return instructorService.updateInstructor(id, dto);
+        InstructorDTO updated = instructorService.updateInstructor(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     // DELETE /api/instructors/{id}

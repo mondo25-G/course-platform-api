@@ -2,6 +2,7 @@ package com.course.platform.controller;
 
 import com.course.platform.dto.CourseDTO;
 import com.course.platform.dto.light.CourseLightDTO;
+import com.course.platform.model.Course;
 import com.course.platform.service.CourseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +20,15 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public List<CourseDTO> getAllCourses() {
-        return courseService.getAllCourses();
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        List<CourseDTO> courses = courseService.getAllCourses();
+        return ResponseEntity.ok(courses);
     }
 
     @GetMapping("/{id}")
-    public CourseDTO getCourseById(@PathVariable Long id) {
-        return courseService.getCourseById(id);
+    public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
+        CourseDTO course  =  courseService.getCourseById(id);
+        return ResponseEntity.ok(course);
     }
 
     @PostMapping
@@ -37,9 +40,10 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public CourseDTO updateCourse(@PathVariable Long id,
+    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id,
                                   @Valid @RequestBody CourseLightDTO dto) {
-        return courseService.updateCourse(id, dto);
+        CourseDTO updated = courseService.updateCourse(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
@@ -49,7 +53,8 @@ public class CourseController {
     }
 
     @GetMapping("/popular")
-    public List<CourseDTO> getMostPopularCourses() {
-        return courseService.getMostPopularCourses();
+    public ResponseEntity<List<CourseDTO>> getMostPopularCourses() {
+        List<CourseDTO> popular = courseService.getMostPopularCourses();
+        return ResponseEntity.ok(popular);
     }
 }

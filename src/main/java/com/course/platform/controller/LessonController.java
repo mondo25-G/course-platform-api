@@ -21,14 +21,16 @@ public class LessonController {
 
     // GET /api/lessons
     @GetMapping
-    public List<LessonDTO> getAllLessons() {
-        return lessonService.getAllLessons();
+    public ResponseEntity<List<LessonDTO>> getAllLessons() {
+        List<LessonDTO> lessons = lessonService.getAllLessons();
+        return ResponseEntity.ok(lessons);
     }
 
     // GET /api/lessons/{id}
     @GetMapping("/{id}")
-    public LessonDTO getLessonById(@PathVariable Long id) {
-        return lessonService.getLessonById(id);
+    public ResponseEntity<LessonDTO> getLessonById(@PathVariable Long id) {
+        LessonDTO lesson = lessonService.getLessonById(id);
+        return ResponseEntity.ok(lesson);
     }
 
     // POST /api/lessons?courseId=1
@@ -42,9 +44,10 @@ public class LessonController {
 
     // PUT /api/lessons/{id}
     @PutMapping("/{id}")
-    public LessonDTO updateLesson(@PathVariable Long id,
+    public ResponseEntity<LessonDTO> updateLesson(@PathVariable Long id,
                                   @Valid @RequestBody LessonLightDTO dto) {
-        return lessonService.updateLesson(id, dto);
+        LessonDTO updated = lessonService.updateLesson(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     // DELETE /api/lessons/{id}
