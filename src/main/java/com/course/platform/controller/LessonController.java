@@ -3,6 +3,7 @@ package com.course.platform.controller;
 import com.course.platform.dto.LessonDTO;
 import com.course.platform.dto.light.LessonLightDTO;
 import com.course.platform.service.LessonService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class LessonController {
     @PostMapping
     public ResponseEntity<LessonDTO> createLesson(
             @RequestParam Long courseId,
-            @RequestBody LessonLightDTO dto) {
+            @Valid @RequestBody LessonLightDTO dto) {
         LessonDTO created = lessonService.createLesson(courseId, dto);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -42,7 +43,7 @@ public class LessonController {
     // PUT /api/lessons/{id}
     @PutMapping("/{id}")
     public LessonDTO updateLesson(@PathVariable Long id,
-                                  @RequestBody LessonLightDTO dto) {
+                                  @Valid @RequestBody LessonLightDTO dto) {
         return lessonService.updateLesson(id, dto);
     }
 

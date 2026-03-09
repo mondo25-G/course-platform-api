@@ -3,6 +3,7 @@ package com.course.platform.controller;
 import com.course.platform.dto.EnrollmentDTO;
 import com.course.platform.dto.light.EnrollmentLightDTO;
 import com.course.platform.service.EnrollmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class EnrollmentController {
 
     // POST /api/enrollments
     @PostMapping
-    public ResponseEntity<EnrollmentDTO> createEnrollment(@RequestBody EnrollmentLightDTO dto) {
+    public ResponseEntity<EnrollmentDTO> createEnrollment(@Valid @RequestBody EnrollmentLightDTO dto) {
         EnrollmentDTO created = enrollmentService.createEnrollment(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }

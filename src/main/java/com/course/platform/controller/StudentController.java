@@ -3,6 +3,7 @@ package com.course.platform.controller;
 import com.course.platform.dto.StudentDTO;
 import com.course.platform.dto.light.StudentLightDTO;
 import com.course.platform.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class StudentController {
 
     // POST /api/students
     @PostMapping
-    public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentLightDTO dto) {
+    public ResponseEntity<StudentDTO> createStudent(@Valid @RequestBody StudentLightDTO dto) {
         StudentDTO created = studentService.createStudent(dto);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -39,7 +40,7 @@ public class StudentController {
     // PUT /api/students/{id}
     @PutMapping("/{id}")
     public StudentDTO updateStudent(@PathVariable Long id,
-                                    @RequestBody StudentLightDTO dto) {
+                                    @Valid @RequestBody StudentLightDTO dto) {
         return studentService.updateStudent(id, dto);
     }
 
