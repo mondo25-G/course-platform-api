@@ -1,4 +1,4 @@
-package com.course.platform;
+package com.course.platform.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CourseIntegrationTest extends BaseTest{
+public class CourseIntegrationTest extends BaseTest {
 
 
 

@@ -1,4 +1,4 @@
-package com.course.platform;
+package com.course.platform.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -8,7 +8,7 @@ import java.util.Map;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-public class LessonIntegrationTest extends BaseTest{
+public class LessonIntegrationTest extends BaseTest {
 
     @Test
     void shouldGetLessons() throws Exception {

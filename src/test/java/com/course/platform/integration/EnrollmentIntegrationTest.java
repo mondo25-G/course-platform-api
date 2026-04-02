@@ -1,4 +1,4 @@
-package com.course.platform;
+package com.course.platform.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
