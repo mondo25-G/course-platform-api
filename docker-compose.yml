@@ -14,17 +14,17 @@ services:
     volumes:
       - courses_data:/var/lib/postgresql/data
 
-  courses-api:
-    build: .
-    container_name: courses-api
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/courses_db
-      SPRING_DATASOURCE_USERNAME: courses_user
-      SPRING_DATASOURCE_PASSWORD: courses_pass
+ # courses-api:
+ #   build: .
+ #   container_name: courses-api
+ #   ports:
+ #     - "8080:8080"
+ #   depends_on:
+ #     - postgres
+ #   environment:
+ #     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/courses_db
+ #     SPRING_DATASOURCE_USERNAME: courses_user
+ #     SPRING_DATASOURCE_PASSWORD: courses_pass
 
 volumes:
   courses_data:
