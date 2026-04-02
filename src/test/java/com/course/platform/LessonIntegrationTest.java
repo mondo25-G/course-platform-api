@@ -82,7 +82,7 @@ public class LessonIntegrationTest extends BaseTest{
     @Test
     void shouldFailValidationWhenCourseIsMissing() throws Exception {
         Map<String, Object> request = Map.of(
-                "title", "title1",
+                "title","title1",
                 "videoUrl", "videoUrl1",
                 "position", 1
         );

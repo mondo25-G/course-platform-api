@@ -2,6 +2,7 @@ package com.course.platform.service;
 
 import com.course.platform.dto.EnrollmentDTO;
 import com.course.platform.dto.light.EnrollmentLightDTO;
+import com.course.platform.exception.DuplicateResourceException;
 import com.course.platform.exception.ResourceNotFoundException;
 import com.course.platform.mapper.Mapper;
 import com.course.platform.model.Course;
@@ -44,6 +45,11 @@ public class EnrollmentService {
 
     // Create a new enrollment
     public EnrollmentDTO createEnrollment(EnrollmentLightDTO dto) {
+
+        if (enrollmentRepository.existsByStudentIdAndCourseId(dto.studentId(), dto.courseId())) {
+            throw new DuplicateResourceException("Student "+dto.studentId()+" is already enrolled in course "+dto.courseId());
+        }
+
         Student student = studentRepository.findById(dto.studentId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Student with id " + dto.studentId() + " not found"));
