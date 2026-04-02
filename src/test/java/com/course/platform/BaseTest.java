@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest(classes = {CoursePlatformApplication.class,BaseTest.TestConfig.class})
+@SpringBootTest()
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
