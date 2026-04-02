@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface InstructorRepository extends JpaRepository<Instructor, Long> {
 
+    boolean existsByEmail(String email);
+
     Optional<Instructor> findByEmail(String email);
 
     List<Instructor> findByNameContainingIgnoreCase(String name);

@@ -2,6 +2,7 @@ package com.course.platform.service;
 
 import com.course.platform.dto.InstructorDTO;
 import com.course.platform.dto.light.InstructorLightDTO;
+import com.course.platform.exception.DuplicateResourceException;
 import com.course.platform.exception.ResourceNotFoundException;
 import com.course.platform.mapper.Mapper;
 import com.course.platform.model.Instructor;
@@ -37,6 +38,11 @@ public class InstructorService {
 
     // Create a new instructor
     public InstructorDTO createInstructor(InstructorLightDTO dto) {
+
+        if (instructorRepository.existsByEmail(dto.email())) {
+            throw new DuplicateResourceException("Email "+dto.email()+ "already exists");
+        }
+
         Instructor instructor = new Instructor();
         instructor.setName(dto.name());
         instructor.setEmail(dto.email());
@@ -47,6 +53,11 @@ public class InstructorService {
 
     // Update an existing instructor
     public InstructorDTO updateInstructor(Long id, InstructorLightDTO dto) {
+
+        if (instructorRepository.existsByEmail(dto.email())) {
+            throw new DuplicateResourceException("Email "+dto.email()+ " already exists");
+        }
+
         Instructor instructor = instructorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Instructor with id " + id + " not found"));
