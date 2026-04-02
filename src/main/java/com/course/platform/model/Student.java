@@ -18,6 +18,7 @@ public class Student {
 
     private String name;
 
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "student",

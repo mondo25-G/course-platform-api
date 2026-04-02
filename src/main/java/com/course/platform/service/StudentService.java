@@ -2,6 +2,7 @@ package com.course.platform.service;
 
 import com.course.platform.dto.StudentDTO;
 import com.course.platform.dto.light.StudentLightDTO;
+import com.course.platform.exception.DuplicateResourceException;
 import com.course.platform.exception.ResourceNotFoundException;
 import com.course.platform.mapper.Mapper;
 import com.course.platform.model.Student;
@@ -38,6 +39,10 @@ public class StudentService {
 
     // Create a student
     public StudentDTO createStudent(StudentLightDTO dto) {
+        if (studentRepository.existsByEmail(dto.email())) {
+            throw new DuplicateResourceException("Email "+dto.email()+ " already exists");
+        }
+
         Student student = new Student();
         student.setName(dto.name());
         student.setEmail(dto.email());
@@ -48,6 +53,11 @@ public class StudentService {
 
     // Update a student
     public StudentDTO updateStudent(Long id, StudentLightDTO dto) {
+
+        if (studentRepository.existsByEmail(dto.email())) {
+            throw new DuplicateResourceException("Email "+dto.email()+ " already exists");
+        }
+
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Student with id " + id + " not found"));
