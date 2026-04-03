@@ -30,10 +30,7 @@ public class CourseService {
     }
 
     public CourseDTO getCourseById(Long id) {
-        Course course = courseRepository.findCourseWithLessons(id);
-        if (course == null) {
-            throw new ResourceNotFoundException("Course with id " + id + " not found");
-        }
+        Course course = courseRepository.findCourseWithLessons(id).orElseThrow(() -> new ResourceNotFoundException("Course with id " + id + " not found"));
         return Mapper.toCourseDTO(course);
     }
 

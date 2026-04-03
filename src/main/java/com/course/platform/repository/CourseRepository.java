@@ -4,6 +4,7 @@ import com.course.platform.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
@@ -17,7 +18,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
         JOIN FETCH c.lessons
         WHERE c.id = :id
     """)
-    Course findCourseWithLessons(Long id);
+    Optional<Course> findCourseWithLessons(Long id);
 
     @Query("""
         SELECT c
